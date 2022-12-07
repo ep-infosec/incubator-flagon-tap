@@ -1,0 +1,82 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+{% extends "main.html" %}
+
+{% block container %}
+<section class="login-section">
+	<div class="login-title">REGISTRATION</div>
+
+	{% if registrationSuccessful %}
+		<div class="form-signin-heading">Thank you for registering!</div>
+	{% elif userExists %}
+		<div class="form-signin-heading">User already exists!</div>
+	{% elif error %}
+		<div class="form-signin-heading">There was an error processing your request. Please try again.<br/><br/>If the problem persists, please contact: software-evaluation@draper.com</div>
+	{% else %}
+		<form class="form-signin" role="form" name="user_form" id="user_form" onsubmit="return validateForm()" method="post" action="{% url 'app_mgr:register' %}" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="form-signin-heading">Create an account</div>
+    	<div class="form-group">
+      	<p class="required">
+      		<label for="id_email">Username: (please use a valid email address)</label>
+      		<input class="form-control" id="id_email" name="email" type="email" placeholder="Enter email"/>
+      	</p>
+    	</div>
+    	<div class="form-group">
+      	<p class="required">
+        	<label for="id_password1">Password:</label>
+        	<input class="form-control" id="id_password" name="password" type="password" placeholder="Enter password"/>
+      	</p>
+    	</div>
+    	<div class="form-group">
+      	<p class="required">
+        	<label for="id_password2">Password (again):</label>
+        	<input class="form-control" id="id_password2" name="password2" type="password" placeholder="Enter password again" />
+    		</p>
+    	</div>
+    	<button id="id_register_button" type="submit" class="btn-bordered btn-login">Submit</button>
+  	</form>
+  {% endif %}
+
+  {% if registrationSuccessful or userExists %}
+    <div class="form-signin-heading">Click here to sign in: <a href="{% url 'app_mgr:login' %}">Sign in</a></div>
+    {% if userExists %}
+    	<div class="form-signin-heading">Or click here if you've forgotten your password: <a href="{% url 'app_mgr:reset' %}">Password reset</a></div>
+    {% endif %}
+  {% endif %}
+</section>
+
+<script>
+// do simple client-side validation of the form before submitting to server
+function validateForm() {
+	var form = document.forms["user_form"];
+	if (form["email"].value == null || form["email"].value == ""
+			|| form["password"].value == null || form["password"].value == ""
+			||	form["password2"].value == null || form["password2"].value == "") {
+		window.alert("Please supply all fields.");
+		return false;
+	}
+	if (form["password"].value != form["password2"].value) {
+		window.alert("Passwords do not match!");
+		return false;
+	}
+	return true;
+}
+</script>
+
+{% endblock %}

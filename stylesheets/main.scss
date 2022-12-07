@@ -1,0 +1,90 @@
+/*Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.*/
+
+$teal           : #283F4E;
+$white          : #F9F9F9;
+$lightgrey      : #EBEBEB;
+$grey           : #54595B;
+$black          : #262626;
+
+$primaryColor   : $teal;
+$secondaryColor : $grey;
+$tertiaryColor  : $white;
+
+$background : $white;
+
+#react-container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#main-container {
+  min-height: 100vh;
+  flex: 1;
+}
+
+.site-footer {
+  width: 100%;
+  background-color: $primaryColor;
+  height: 50px;
+  margin-top: 20px;
+}
+
+.site-header {
+  width: 100%;
+  background-color: $primaryColor;
+  height: 50px;
+}
+
+#page-wrapper {
+  padding-top: 40px;
+  min-height: calc(100vh - 120px);
+}
+
+#main-masthead {
+  padding: 60px 0;
+}
+
+#homepage-container {
+  margin-top: -60px;
+}
+
+#results-controls {
+  background-color: $background;
+}
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  font: 12px sans-serif;
+  min-width: 100px;
+  min-height: 24px;
+  padding: 4px;
+  pointer-events: none;
+  background-color: $lightgrey;
+  border-style: solid;
+  border-width: 1px;
+  border-color: $grey;
+}
+
+#counts-details {
+  word-wrap: break-word;
+  background-color: $background;
+}
+
+#app-list {
+  background-color: $background;
+}
